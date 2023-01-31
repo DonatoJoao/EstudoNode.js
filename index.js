@@ -5,14 +5,34 @@ import fs from 'fs';
 function trataErro (erro) {
     throw new Error(chalk.redBright(erro.code, 'não foi encontrado o arquivo no diretório'));
 }
-// ***código assíncrono***
-function pegaArquivo(caminhoDoArquivo){
+
+// ***trabalhando com async/await***
+async function pegaArquivo (caminhoDoArquivo){
+    try {
     const encoding = 'utf-8';
-    fs.promises
-    .readFile(caminhoDoArquivo, encoding)
-    .then((texto) => console.log(chalk.green(texto)))
-    .catch(trataErro)
+    const texto = await fs.promises.readFile(caminhoDoArquivo, encoding)
+    console.log(chalk.grey (texto))
+    } catch (erro) {
+        trataErro(erro);
+    }
+    finally {
+        console.log(chalk.yellow('operação concluída'));
+    }
 }
+
+
+
+// ***modelo código assíncrono com metodo .then***
+// function pegaArquivo(caminhoDoArquivo){
+//     const encoding = 'utf-8';
+//     fs.promises
+//     .readFile(caminhoDoArquivo, encoding)
+//     .then((texto) => console.log(chalk.green(texto)))
+//     .catch(trataErro)
+// }
+
+
+
 // ***código síncrono***
 // function pegaArquivo (caminhoDoArquivo){
 //     const encoding = 'utf-8';
@@ -26,3 +46,5 @@ function pegaArquivo(caminhoDoArquivo){
 //}
 
 pegaArquivo('./arquivos/texto.md');
+
+
