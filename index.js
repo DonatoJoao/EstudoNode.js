@@ -2,8 +2,18 @@ import chalk from 'chalk';
 
 import fs from 'fs';
 
+
+
+function extraiLinks (texto) {
+    const regex = /\[([^[\]]*?)\]\((https?:\/\/[^\s?#.]*[^\s]*)\)/gm;
+    const capturas = [...texto.matchAll(regex)];
+    const resultados = capturas.map(captura => ({[captura[1]]: captura[2]}))
+    return resultados;
+}
+
+
 function trataErro (erro) {
-    throw new Error(chalk.redBright(erro.code, 'não foi encontrado o arquivo no diretório'));
+    throw new Error(erro.code, 'não foi encontrado o arquivo no diretório');
 }
 
 // ***trabalhando com async/await***
@@ -11,15 +21,13 @@ async function pegaArquivo (caminhoDoArquivo){
     try {
     const encoding = 'utf-8';
     const texto = await fs.promises.readFile(caminhoDoArquivo, encoding)
-    console.log(chalk.grey (texto))
+    console.log(extraiLinks(texto));
     } catch (erro) {
-        trataErro(erro);
+        trataErro(erro)
     }
-    finally {
-        console.log(chalk.yellow('operação concluída'));
-    }
+    
 }
-
+ pegaArquivo('./arquivos/texto.md');
 
 
 // ***modelo código assíncrono com metodo .then***
@@ -45,6 +53,5 @@ async function pegaArquivo (caminhoDoArquivo){
 //     })
 //}
 
-pegaArquivo('./arquivos/texto.md');
 
 
