@@ -5,13 +5,13 @@ import listaValidada from './http-validacao.js';
 
 const caminho = process.argv;
 
-function imprimeLista (valida ,resultado, indentificador = '') {
+async function imprimeLista (valida ,resultado, indentificador = '') {
     
     if (valida) {
 
         console.log(chalk.yellow('Lista Validada'),
         chalk.black.bgGreen(indentificador),
-        listaValidada(resultado));
+        await listaValidada(resultado));
     } else {
         console.log(chalk.yellow('Lista de Links'),
         chalk.black.bgGreen(indentificador),
