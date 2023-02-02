@@ -1,12 +1,12 @@
 {
-  "name": "node_js_primeiraAPI",
+  "name": "Minha_PrimeiraAPI",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./cli.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cli": "node ./src/cli.js ./arquivos/texto.md",
+    "cli": "node ./src/cli.js",
     "cli:valida": "node ./src/cli.js ./arquivos/texto.md --valida"
   },
   "keywords": [],
